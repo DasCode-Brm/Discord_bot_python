@@ -13,7 +13,8 @@ async def on_ready():
     status_change.start()
     print(f"bot encendido: {bot.user.name}")
     print(f"bot id: {bot.user.id}")
-
+    print(f"bot servers: {len(bot.guilds)}")
+    print('Name_server:', ','.join([str(lst) for lst in bot.guilds]))
 
 @tasks.loop(seconds=10)
 async def status_change():
