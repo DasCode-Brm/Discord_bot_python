@@ -55,6 +55,7 @@ async def clear(ctx, m=""):
         if m == 0:
             embed = discord.Embed(title="Aviso", description="{0} mensajes borrados".format(len(d)),
                                   color=discord.Color.red())
+            return
     else:
         await ctx.send("solo argumentos numericos positivos")
         return
