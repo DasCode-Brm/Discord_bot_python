@@ -52,6 +52,7 @@ async def clear(ctx, m=""):
         return
     elif m.isnumeric():
         m = int(m)
+        d = []
         if m == 0:
             embed = discord.Embed(title="Aviso", description="{0} mensajes borrados".format(len(d)),
                                   color=discord.Color.red())
@@ -75,7 +76,6 @@ async def clear(ctx, m=""):
                 embed = discord.Embed(title="Aviso", description="{0} mensaje borrado".format(len(d)),
                                       color=discord.Color.red())
             m = 0
-            d = []
         elif not f <= time <= datetime.utcnow():
             if len(d) >= 1:
                 await ctx.send(
