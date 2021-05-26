@@ -55,6 +55,9 @@ async def clear(ctx, m=""):
         if m == 0:
             embed = discord.Embed(title="Aviso", description="{0} mensajes borrados".format(len(d)),
                                   color=discord.Color.red())
+            await ctx.send(embed=embed, delete_after=4)
+            return
+            
         
     else:
         await ctx.send("solo argumentos numericos positivos")
@@ -72,6 +75,7 @@ async def clear(ctx, m=""):
                 embed = discord.Embed(title="Aviso", description="{0} mensaje borrado".format(len(d)),
                                       color=discord.Color.red())
             m = 0
+            d = []
         elif not f <= time <= datetime.utcnow():
             if len(d) >= 1:
                 await ctx.send(
@@ -85,9 +89,7 @@ async def clear(ctx, m=""):
                                "de antiguedad, el ultimo mensajes enviado tiene: {0} dias, si quiere eliminar el "
                                " contenido, clona el canal".format(day))
                 return
-    d = []
     await ctx.send(embed=embed, delete_after=4)
-    embed = ""
 
 
 @clear.error
