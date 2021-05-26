@@ -29,7 +29,6 @@ async def status_change():
 @bot.event
 async def on_message(message):
     if bot.user.mentioned_in(message):
-        change_prefix()
         await message.channel.send("Mi prefix es $")
     await bot.process_commands(message)
 
