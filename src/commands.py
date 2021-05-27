@@ -44,9 +44,9 @@ async def tim(ctx):
 @bot.command(aliases=["cls"])
 @commands.has_permissions(manage_messages=True)
 @commands.bot_has_permissions(manage_messages=True)
-async def clear(ctx, m=""):
+async def clear(ctx, m=None):
     global d, embed
-    if m == "":
+    if m is None:
         embes = discord.Embed(description="<a:no:846822577666392094> Requiere un argumento <a:no:846822577666392094> ",
                               color=discord.Color.red())
         await ctx.send(embed=embes)
@@ -60,7 +60,7 @@ async def clear(ctx, m=""):
             await ctx.send(embed=embed, delete_after=4)
             return
     else:
-        await ctx.send("solo argumentos numericos positivos")
+        await ctx.send("Solo argumentos numericos positivos")
         return
     await ctx.message.delete()
     f = datetime.utcnow() - timedelta(days=14)
@@ -98,8 +98,11 @@ async def clear_error(ctx, error):
                               color=discord.Color.purple())
         await ctx.send(embed=embed)
 
-    if isinstance(error, commands.errors.BotMissingPermissions):
+    elif isinstance(error, commands.errors.BotMissingPermissions):
         embe = discord.Embed(title="Error",
                              description=":no_entry_sign: No tengo permisos, damelos <a:birb:846825232907239477> "":no_entry_sign:",
                              color=discord.Color.purple())
         await ctx.send(embed=embe)
+
+    elif isinstance(error, commands.errors.ExpectedClosingQuoteError):
+        await ctx.send("Solo argumentos numericos positivos")
