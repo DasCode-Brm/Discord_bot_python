@@ -26,18 +26,19 @@ async def nuke(ctx, ready=""):
 
 
 @bot.command()
-async def tim(ctx, m=""):
-    m = int(m)
-    f = datetime.utcnow() - timedelta(days=14)
-    async for message in ctx.channel.history(limit=m):
-        time = message.created_at
-        print(f"mensaje: {message.content}")
-        print(f"fecha del mensaje: {time}")
-        if f <= time <= datetime.utcnow():
-            print("esta en el rango")
-        else:
-            print("no esta en el rango")
-            return
+async def tim(ctx):
+    group_message = []
+    minimum_date = datetime.utcnow().date().strftime("%d/%m/%Y")
+    minimum_date = datetime.strptime(minimum_date, '%d/%m/%Y')
+    messages = await ctx.channel.history(limit=None, after=minimum_date).flatten()
+    for message in messages:
+        message_date = message.created_at
+        message_date = message_date - timedelta(hours=5)
+        if minimum_date <= message_date <= datetime.utcnow():
+            group_message.append(message)
+    await ctx.send(f"Cantidad de mensajes: {len(group_message)}")
+    """for d in group_message:
+        print(f"mensaje content: {d.content}")"""
 
 
 @bot.command(aliases=["cls"])
@@ -57,8 +58,6 @@ async def clear(ctx, m=""):
                                   color=discord.Color.red())
             await ctx.send(embed=embed, delete_after=4)
             return
-            
-        
     else:
         await ctx.send("solo argumentos numericos positivos")
         return
