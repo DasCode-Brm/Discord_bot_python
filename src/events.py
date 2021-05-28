@@ -1,5 +1,4 @@
-import datetime
-
+from datetime import datetime,timedelta
 import discord
 from discord.ext import commands, tasks
 from prefix import bot
@@ -18,7 +17,7 @@ async def on_ready():
     print(f"Bot id: {bot.user.id}")
     print(f"Bot servers: {len(bot.guilds)}")
     print('Name_server:', ','.join([str(lst) for lst in bot.guilds]))
-    print(f"Fecha de inicio: {datetime.datetime.now().strftime('%d-%B-%Y %I:%M:%S %p')}")
+    print(f"Fecha de inicio: {(datetime.now()-timedelta(hours=5)).strftime('%d-%B-%Y %I:%M:%S %p')}")
 
 
 @tasks.loop(seconds=10)
