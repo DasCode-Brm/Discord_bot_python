@@ -36,7 +36,7 @@ async def nuke(ctx, ready=""):
 @bot.command()
 async def tim(ctx):
     group_message = []
-    minimum_date = datetime.utcnow().date().strftime("%d/%m/%Y")
+    minimum_date = (datetime.utcnow().date().strftime("%d/%m/%Y"))
     minimum_date = datetime.strptime(minimum_date, '%d/%m/%Y')
     messages = await ctx.channel.history(limit=None, after=minimum_date).flatten()
     for message in messages:
