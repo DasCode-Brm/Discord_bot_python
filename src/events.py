@@ -17,8 +17,12 @@ async def on_ready():
     print(f"Bot id: {bot.user.id}")
     print(f"Bot servers: {len(bot.guilds)}")
     print('Name_server:', ','.join([str(lst) for lst in bot.guilds]))
-    print(datetime.now() == datetime.utcnow())
-    if datetime.now() == datetime.utcnow():
+    print(datetime.utcnow() == datetime.utcnow())
+    if datetime.utcnow():
+        print("fecha correcta")
+    else:
+        print("fecha incorrecta")
+    if datetime.utcnow() == datetime.utcnow():
         print(f"Fecha de inicio: {(datetime.now()-timedelta(hours=5)).strftime('%d-%B-%Y %I:%M:%S %p')}")
     else:
         print(f"Fecha de inicio: {(datetime.now()).strftime('%d-%B-%Y %I:%M:%S %p')}")
